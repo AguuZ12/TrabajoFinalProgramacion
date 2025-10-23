@@ -22,14 +22,27 @@ public class GestionProductos {
 
     // FUNCION CREACION ITEM
     // ESTA FUNCION EN CASO DE NO EXISTIR UN ITEM PERMITE LA CREACION DEL MISMO
-    public void crearItem(String getItem, int stock, double precio){
-        Item itemEncontrado = itemExiste(getItem);
-        if (itemEncontrado == null){
-            listaItems.add(new Item(getItem,stock,precio));
+    public boolean crearItem(String appItem, int stock, double precio){
+        if (appItem == null || appItem.isBlank()){
+            System.out.println("El nombre del item no puede estar vacio");
+            return false;
+        }
+        if (stock <= 0){
+            System.out.println("El nombre del item no puede estar vacio");
+            return false;
+        }
+        if (precio <= 0){
+            System.out.println("El nombre del item no puede estar vacio");
+            return false;
+        }
+        if (itemExiste(appItem) == null){
+            listaItems.add(new Item(appItem,stock,precio));
             System.out.println("Item agregado correctamente");
+            return true;
         }
         else {
             System.out.println("El item ya existe, desea agregar stock?");
+            return false;
         }
     }
 
@@ -45,12 +58,15 @@ public class GestionProductos {
 
     // MUESTRA ITEM
     //PERMITE LA BUSQUEDA DE 1 ITEM ESPECIFICO Y MUESTRA SU DESCRIPCION, STOCK Y PRECIO
-    public void muestraItem(String getItem){
-        Item itemEncontrado = itemExiste(getItem);
-        if (itemEncontrado != null){
+    public void muestraItem(String appItem){
+        if(appItem == null || appItem.isBlank()){
+            System.out.println("El item no puede estar vacio");
+        }
+
+        if (itemExiste(appItem) != null){
             System.out.println("<========= INVENTARIO =========>");
             System.out.printf("%-10s %-10s %s %n", "Producto", "Stock", "Precio");
-            System.out.printf("%-10s %-10s %s%n", itemEncontrado.getNombre(), itemEncontrado.getStock(), itemEncontrado.getPrecio());
+            System.out.printf("%-10s %-10s %s%n", itemExiste(appItem).getNombre(), itemExiste(appItem).getStock(), itemExiste(appItem).getPrecio());
         }
         else {
             System.out.println("El item ingreasdo no existe, desea crearlo?");
@@ -59,32 +75,45 @@ public class GestionProductos {
 
     // FUNCION AGREGADO DE STOCK
     // ESTA FUNCION PERMITE EL INGRESO DE STOCK EN CASO DE QUE EL ITEM EXISTA Y LA SUMA A AGREGAR NO SEA INFERIOR MENOR A 1
-    public void agregarStock(String getItem, int nuevoStock){
-        Item itemEncontrado = itemExiste(getItem);
-        if (itemEncontrado != null){
-            if (nuevoStock > 0){
-                itemEncontrado.setStock(itemEncontrado.getStock() + nuevoStock);
-            }
+    public boolean agregarStock(String appItem, int nuevoStock){
+        if (appItem == null || appItem.isBlank()){
+            System.out.println("El item no puede estar vacio");
+            return false;
+        }
+        if (nuevoStock <= 0){
+            System.out.println("El stock a agregar debe ser mayor que 0");
+            return false;
+        }
+
+        if (itemExiste(appItem) != null){
+            itemExiste(appItem).setStock(itemExiste(appItem).getStock() + nuevoStock);
+            return true;
         }
         else {
             System.out.println("Item no encontrado");
+            return false;
         }
     }
 
     // FUNCION RESTA STOCK
     // ESTA FUNCION PERMITE REDUCIR EL STOCK EN CASO DE QUE EL ITEM EXISTA Y SU STOCK NO SEA INFERIOR A LA CANTIDAD QUE SE DESEA RESTAR
-    public void quitarStock(String getItem, int cantidadVenta){
-        Item itemEncontrado = itemExiste(getItem);
-        if (itemEncontrado != null){
-            if (cantidadVenta <= itemEncontrado.getStock()){
-                itemEncontrado.setStock(itemEncontrado.getStock() - cantidadVenta);
-            }
-            else if (cantidadVenta > itemEncontrado.getStock()){
-                System.out.println("Stock insuficiente para realizar esta accion");
-            }
+    public boolean quitarStock(String appItem, int cantidadVenta){
+        if (appItem == null || appItem.isBlank()){
+            System.out.println("El nombre del item no puede estar vacio");
+            return false;
+        }
+        if (cantidadVenta > itemExiste(appItem).getStock()){
+            System.out.println("Stock insuficiente para realizar esta accion");
+            return false;
+        }
+        if (itemExiste(appItem) != null){
+            itemExiste(appItem).setStock(itemExiste(appItem).getStock() - cantidadVenta);
+            System.out.println("Operacion realizada con exito");
+            return true;
         }
         else {
             System.out.println("El item no existe");
+            return false;
         }
     }
 }
