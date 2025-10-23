@@ -1,0 +1,74 @@
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+public class GestionUsuarios {
+    List<Usuario> listaUsuarios = new ArrayList<>(Arrays.asList(
+            new Usuario("ana.garcia@email.com", "Ana123456"),
+            new Usuario("carlos.lopez@empresa.com", "ClaveSegura789"),
+            new Usuario("maria.rodriguez@outlook.com", "Maria@2024"),
+            new Usuario("admin@sistema.com", "Admin123!"),
+            new Usuario("juan.perez@gmail.com", "Ju4nP3r3z!")
+    ));
+//Funcion comprobacion de existencia de usuaio
+    public Usuario usuarioExiste(String appEmail){
+        for (Usuario usuario : listaUsuarios){
+            if (usuario.getEmail().equalsIgnoreCase(appEmail)){
+                return usuario;
+            }
+        }
+        return null;
+    }
+
+//    public void muestraUsuario(String getEmail){
+//        if (usuarioExiste(getEmail) != null){
+//            System.out.println(usuarioExiste(getEmail).getEmail());
+//        }
+//        else {
+//            System.out.println("El usuario no existe");
+//        }
+//    }
+
+    public boolean registroUsuario(String appEmail, String appPassword){
+        if(appEmail == null || appEmail.isBlank()){
+            System.out.println("El correo no puede estar vacio");
+            return false;
+        }
+        if(appPassword == null || appPassword.isBlank()){
+            System.out.println("La contraseña no puede estar vacia");
+            return false;
+        }
+        if (usuarioExiste(appEmail) == null){
+            listaUsuarios.add(new Usuario(appEmail,appPassword));
+            System.out.println("Usuario registrado exitosamente");
+            return true;
+        }
+        else {
+            System.out.println("El usuario ingresado ya existe");
+            return false;
+        }
+    }
+
+    public boolean inicioSesion(String appEmail, String appPassword){
+        if (appEmail == null || appEmail.isBlank()){
+            System.out.println("El correo no puede estar vacio");
+            return false;
+        }
+        if (appPassword == null || appPassword.isBlank()){
+            System.out.println("La contraseña no puede estar vacia");
+            return false;
+        }
+        if (usuarioExiste(appEmail).getEmail().equalsIgnoreCase(appEmail) && usuarioExiste(appEmail).getPassword().equals(appPassword)){
+            System.out.println("Sesion Iniciada");
+            return true;
+        }
+        else {
+            System.out.println("Usuario o contraseña incorrectas");
+            return false;
+        }
+    }
+
+    public static void main(String[] args){
+        GestionUsuarios usuarios = new GestionUsuarios();
+        usuarios.inicioSesion("maria.rodriguez@outlook.com","Maria@2024");
+    }
+}
