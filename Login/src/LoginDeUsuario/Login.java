@@ -5,6 +5,8 @@
 package LoginDeUsuario;
 
 import java.awt.Color;
+import GestionUsuarios.GestionUsuarios;
+import GestionUsuarios.Usuario;
 
 /**
  *
@@ -157,14 +159,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreUsuarioActionPerformed
 
     private void BotonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIniciarActionPerformed
-        // TODO add your handling code here:
+        GestionUsuarios gestion = new GestionUsuarios();
+        String appEmail = NombreUsuario.getText();
+        char[] Password = Pass.getPassword();
+        String appPassword = new String(Password);
+        gestion.inicioSesion(appEmail, appPassword);
     }//GEN-LAST:event_BotonIniciarActionPerformed
 
     private void NombreUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreUsuarioMousePressed
         NombreUsuario.setText("");
         NombreUsuario.setForeground(Color.BLACK);
-        Pass.setText("********");
-        Pass.setForeground(Color.gray);
+        
         
     }//GEN-LAST:event_NombreUsuarioMousePressed
 
@@ -173,8 +178,6 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_PassActionPerformed
 
     private void PassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PassMousePressed
-        NombreUsuario.setText("Ingrese su nombre de usuario");
-        NombreUsuario.setForeground(Color.gray);
         Pass.setText("");
         Pass.setForeground(Color.black);
     }//GEN-LAST:event_PassMousePressed
