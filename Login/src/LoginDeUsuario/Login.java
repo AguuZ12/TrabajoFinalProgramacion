@@ -5,8 +5,8 @@
 package LoginDeUsuario;
 
 import java.awt.Color;
-import GestionUsuarios.GestionUsuarios;
-import GestionUsuarios.Usuario;
+import Gestion.GestionUsuarios;
+
 
 /**
  *

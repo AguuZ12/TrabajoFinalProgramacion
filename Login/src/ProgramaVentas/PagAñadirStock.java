@@ -4,6 +4,8 @@
  */
 package ProgramaVentas;
 
+import Gestion.GestionProductos;
+import java.awt.Color;
 /**
  *
  * @author Emiliano Castro
@@ -30,15 +32,19 @@ public class PagAñadirStock extends javax.swing.JPanel {
         jTable1 = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         Fondo = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
+        AgregarStock = new javax.swing.JButton();
         PanelAñadirStock = new javax.swing.JPanel();
         PalabraAñadirStock = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        PrecioVenta = new javax.swing.JTextField();
+        NombreProducto = new javax.swing.JTextField();
+        CodigoProducto = new javax.swing.JTextField();
+        StockProducto = new javax.swing.JTextField();
+        PrecioCompra = new javax.swing.JTextField();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -58,11 +64,16 @@ public class PagAñadirStock extends javax.swing.JPanel {
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(255, 107, 107));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("AÑADIR AL STOCK");
-        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 710, 70));
+        AgregarStock.setBackground(new java.awt.Color(255, 107, 107));
+        AgregarStock.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
+        AgregarStock.setForeground(new java.awt.Color(51, 51, 51));
+        AgregarStock.setText("GUARDAR");
+        AgregarStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                AgregarStockActionPerformed(evt);
+            }
+        });
+        Fondo.add(AgregarStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 490, 710, 70));
 
         PanelAñadirStock.setBackground(new java.awt.Color(239, 253, 255));
 
@@ -87,59 +98,67 @@ public class PagAñadirStock extends javax.swing.JPanel {
 
         Fondo.add(PanelAñadirStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 80));
 
-        jTextField1.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField1.setText("INGRESE PRECIO DE VENTA DEL PRODUCTO");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        PrecioVenta.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        PrecioVenta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PrecioVentaMousePressed(evt);
             }
         });
-        Fondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 410, 700, 40));
+        Fondo.add(PrecioVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 700, 40));
 
-        jTextField2.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField2.setText("INGRESE NOMBRE DEL PRODUCTO");
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+        NombreProducto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        NombreProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                NombreProductoMousePressed(evt);
             }
         });
-        Fondo.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, 700, 40));
+        Fondo.add(NombreProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, 700, 40));
 
-        jTextField3.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField3.setText("INGRESE CODIGO DEL PRODUCTO");
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+        CodigoProducto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        CodigoProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CodigoProductoMousePressed(evt);
             }
         });
-        Fondo.add(jTextField3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 170, 700, 40));
+        Fondo.add(CodigoProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 200, 700, 40));
 
-        jTextField4.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField4.setText("INGRESE STOCK DEL PRODUCTO");
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+        StockProducto.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        StockProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        StockProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                StockProductoMousePressed(evt);
             }
         });
-        Fondo.add(jTextField4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 230, 700, 40));
+        Fondo.add(StockProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 700, 40));
 
-        jTextField5.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField5.setText("INGRESE STOCK DEL PRODUCTO");
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+        PrecioCompra.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
+        PrecioCompra.setToolTipText("");
+        PrecioCompra.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PrecioCompraMousePressed(evt);
             }
         });
-        Fondo.add(jTextField5, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 290, 700, 40));
+        Fondo.add(PrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 360, 700, 40));
 
-        jTextField6.setFont(new java.awt.Font("Roboto", 0, 14)); // NOI18N
-        jTextField6.setText("INGRESE PRECIO DE COMPRA DEL PRODUCTO");
-        jTextField6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField6ActionPerformed(evt);
-            }
-        });
-        Fondo.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 350, 700, 40));
+        jLabel2.setFont(new java.awt.Font("Caveat", 1, 12)); // NOI18N
+        jLabel2.setText("PRECIO DE VENTA");
+        Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 410, 180, 30));
+
+        jLabel3.setFont(new java.awt.Font("Caveat", 1, 12)); // NOI18N
+        jLabel3.setText("NOMBRE DEL PRODUCTO");
+        Fondo.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 180, 30));
+
+        jLabel4.setFont(new java.awt.Font("Caveat", 1, 12)); // NOI18N
+        jLabel4.setText("CODIGO DEL PRODUCTO");
+        Fondo.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 170, 180, 30));
+
+        jLabel5.setFont(new java.awt.Font("Caveat", 1, 12)); // NOI18N
+        jLabel5.setText("STOCK DEL PRODUCTO");
+        Fondo.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 250, 180, 30));
+
+        jLabel6.setFont(new java.awt.Font("Caveat", 1, 12)); // NOI18N
+        jLabel6.setText("PRECIO DE COMPRA");
+        Fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -153,44 +172,63 @@ public class PagAñadirStock extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void AgregarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarStockActionPerformed
+        String Nombre = NombreProducto.getText().trim();
+        String Codigo = CodigoProducto.getText().trim();
+        String stockT = StockProducto.getText().trim();
+        String precioCompraT = PrecioCompra.getText().trim();
+        String precioVentaT = PrecioVenta.getText().trim();
+        int precioCompra =  Integer.parseInt(precioCompraT);
+        int stock = Integer.parseInt(stockT);
+        int precioVenta = Integer.parseInt(precioVentaT);
+        
+        GestionProductos g = new GestionProductos();
+        g.crearItem(Nombre, Codigo, stock, precioCompra, precioVenta);
+    }//GEN-LAST:event_AgregarStockActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    private void NombreProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreProductoMousePressed
+        NombreProducto.setText("");
+        NombreProducto.setForeground(Color.black);
+    }//GEN-LAST:event_NombreProductoMousePressed
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    private void PrecioVentaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrecioVentaMousePressed
+        PrecioVenta.setText("");
+        PrecioVenta.setForeground(Color.black);
+    }//GEN-LAST:event_PrecioVentaMousePressed
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    private void PrecioCompraMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PrecioCompraMousePressed
+        PrecioCompra.setText("");
+        PrecioCompra.setForeground(Color.black);
+    }//GEN-LAST:event_PrecioCompraMousePressed
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    private void CodigoProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CodigoProductoMousePressed
+        CodigoProducto.setText("");
+        CodigoProducto.setForeground(Color.black);
+    }//GEN-LAST:event_CodigoProductoMousePressed
 
-    private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField6ActionPerformed
+    private void StockProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_StockProductoMousePressed
+        StockProducto.setText("");
+        StockProducto.setForeground(Color.black);
+    }//GEN-LAST:event_StockProductoMousePressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AgregarStock;
+    private javax.swing.JTextField CodigoProducto;
     private javax.swing.JPanel Fondo;
+    private javax.swing.JTextField NombreProducto;
     private javax.swing.JLabel PalabraAñadirStock;
     private javax.swing.JPanel PanelAñadirStock;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTextField PrecioCompra;
+    private javax.swing.JTextField PrecioVenta;
+    private javax.swing.JTextField StockProducto;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     // End of variables declaration//GEN-END:variables
 }

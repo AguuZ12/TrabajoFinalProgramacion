@@ -5,7 +5,7 @@
 package Register;
 
 import java.awt.Color;
-import GestionUsuarios.GestionUsuarios;
+import Gestion.GestionUsuarios;
 
 /**
  *

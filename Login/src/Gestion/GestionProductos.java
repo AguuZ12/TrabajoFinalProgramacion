@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package GestionUsuarios;
+package Gestion;
 
 /**
  *
@@ -14,9 +14,16 @@ import java.util.List;
 
 public class GestionProductos {
     List<Item> listaItems = new ArrayList<>(Arrays.asList(
-            new Item("Pelota",15,1500),
-            new Item("Pala",13,6000),
-            new Item("Gato",16,100000)
+            new Item("Arroz Blanco", "ALI001", 200, 800.0, 1500.0),
+            new Item("Fideos Tallarín", "ALI002", 150, 600.0, 1200.0),
+            new Item("Aceite de Girasol", "ALI003", 80, 2500.0, 4500.0),
+            new Item("Harina 0000", "ALI004", 120, 700.0, 1300.0),
+            new Item("Azúcar Común", "ALI005", 180, 900.0, 1700.0),
+            new Item("Sal Fina", "ALI006", 90, 400.0, 800.0),
+            new Item("Leche Entera", "LAC001", 300, 300.0, 600.0),
+            new Item("Queso Cremón", "LAC002", 60, 3500.0, 6500.0),
+            new Item("Manteca", "LAC003", 75, 1200.0, 2200.0),
+            new Item("Yogur Natural", "LAC004", 200, 250.0, 500.0)
     ));
 
    // FUNCION EXISTE
@@ -32,7 +39,7 @@ public class GestionProductos {
 
     // FUNCION CREACION ITEM
     // ESTA FUNCION EN CASO DE NO EXISTIR UN ITEM PERMITE LA CREACION DEL MISMO
-    public boolean crearItem(String appItem, int stock, double precio){
+    public boolean crearItem(String appItem, String codigo, int stock, double precioCompra, double precioVenta){
         if (appItem == null || appItem.isBlank()){
             System.out.println("El nombre del item no puede estar vacio");
             return false;
@@ -41,13 +48,18 @@ public class GestionProductos {
             System.out.println("El nombre del item no puede estar vacio");
             return false;
         }
-        if (precio <= 0){
-            System.out.println("El nombre del item no puede estar vacio");
+        if (precioVenta <= 0){
+            System.out.println("El precio de venta no puede ser 0 o menor");
+            return false;
+        }
+        if (precioCompra <= 0){
+            System.out.println("El preco de compra no puede ser 0 o menor");
             return false;
         }
         if (itemExiste(appItem) == null){
-            listaItems.add(new Item(appItem,stock,precio));
+            listaItems.add(new Item(appItem,codigo,stock,precioCompra,precioVenta));
             System.out.println("Item agregado correctamente");
+            System.out.print(itemExiste(appItem).getNombre()+ itemExiste(appItem).getCodigo() + itemExiste(appItem).getStock() + itemExiste(appItem).getPrecioCompra()+ itemExiste(appItem).getPrecioVenta());
             return true;
         }
         else {
@@ -62,7 +74,7 @@ public class GestionProductos {
         System.out.println("<========= INVENTARIO =========>");
         System.out.printf("%-10s %-10s %s %n", "Producto", "Stock", "Precio");
         for (Item item : listaItems){
-            System.out.printf("%-10s %-10s %s%n", item.getNombre(), item.getStock(), item.getPrecio());
+            System.out.printf("%-10s %-10s %s%n", item.getNombre(),item.getCodigo(), item.getStock(), item.getPrecioCompra(), item.getPrecioVenta());
         }
     }
 
@@ -76,7 +88,7 @@ public class GestionProductos {
         if (itemExiste(appItem) != null){
             System.out.println("<========= INVENTARIO =========>");
             System.out.printf("%-10s %-10s %s %n", "Producto", "Stock", "Precio");
-            System.out.printf("%-10s %-10s %s%n", itemExiste(appItem).getNombre(), itemExiste(appItem).getStock(), itemExiste(appItem).getPrecio());
+            System.out.printf("%-10s %-10s %s%n", itemExiste(appItem).getNombre(),itemExiste(appItem).getCodigo(), itemExiste(appItem).getStock(), itemExiste(appItem).getPrecioCompra(),itemExiste(appItem).getPrecioVenta());
         }
         else {
             System.out.println("El item ingreasdo no existe, desea crearlo?");
