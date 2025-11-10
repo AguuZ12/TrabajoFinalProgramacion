@@ -211,7 +211,7 @@ public class PaginaRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoContraseñaMousePressed
 
     private void BotonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarseActionPerformed
-        // TODO add your handling code here:
+                                       // TODO add your handling code here:
     }//GEN-LAST:event_BotonRegistrarseActionPerformed
 
     private void TextoContraseña1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoContraseña1MousePressed
