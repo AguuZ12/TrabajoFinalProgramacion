@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 public class GestionUsuarios {
     List<Usuario> listaUsuarios = new ArrayList<>(Arrays.asList(
-            new Usuario("ana.garcia@email.com", "Ana123456"),
+            new Usuario("Agustin", "Ana123456"),
             new Usuario("carlos.lopez@empresa.com", "ClaveSegura789"),
             new Usuario("maria.rodriguez@outlook.com", "Maria@2024"),
             new Usuario("admin@sistema.com", "Admin123!"),
@@ -38,7 +38,7 @@ public class GestionUsuarios {
 //        }
 //    }
 
-    public boolean registroUsuario(String appEmail, String appPassword){
+    public boolean registroUsuario(String appEmail, String appPassword, String appPassword2){
         if(appEmail == null || appEmail.isBlank()){
             System.out.println("El correo no puede estar vacio");
             return false;
@@ -47,7 +47,11 @@ public class GestionUsuarios {
             System.out.println("La contraseña no puede estar vacia");
             return false;
         }
-        if (usuarioExiste(appEmail) == null){
+        if(appPassword2 == null || appPassword2.isBlank()){
+            System.out.println("La contraseña no puede estar vacia");
+            return false;
+        }
+        if (usuarioExiste(appEmail) == null && appPassword.equals(appPassword2)){
             listaUsuarios.add(new Usuario(appEmail,appPassword));
             System.out.println("Usuario registrado exitosamente");
             return true;

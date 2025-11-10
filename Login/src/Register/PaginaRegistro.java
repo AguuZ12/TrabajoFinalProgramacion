@@ -5,6 +5,7 @@
 package Register;
 
 import java.awt.Color;
+import GestionUsuarios.GestionUsuarios;
 
 /**
  *
@@ -92,7 +93,6 @@ public class PaginaRegistro extends javax.swing.JFrame {
 
         NombreUsuario.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         NombreUsuario.setForeground(new java.awt.Color(153, 153, 153));
-        NombreUsuario.setText("Ingrese su nombre de usuario");
         NombreUsuario.setBorder(null);
         NombreUsuario.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -121,7 +121,6 @@ public class PaginaRegistro extends javax.swing.JFrame {
 
         RepetirPass.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         RepetirPass.setForeground(new java.awt.Color(153, 153, 153));
-        RepetirPass.setText("********");
         RepetirPass.setBorder(null);
         RepetirPass.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -155,7 +154,6 @@ public class PaginaRegistro extends javax.swing.JFrame {
 
         Pass1.setFont(new java.awt.Font("Roboto", 0, 18)); // NOI18N
         Pass1.setForeground(new java.awt.Color(153, 153, 153));
-        Pass1.setText("********");
         Pass1.setBorder(null);
         Pass1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -190,8 +188,7 @@ public class PaginaRegistro extends javax.swing.JFrame {
     private void NombreUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreUsuarioMousePressed
         NombreUsuario.setText("");
         NombreUsuario.setForeground(Color.BLACK);
-        RepetirPass.setText("********");
-        RepetirPass.setForeground(Color.gray);
+       
         
     }//GEN-LAST:event_NombreUsuarioMousePressed
 
@@ -200,8 +197,6 @@ public class PaginaRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_RepetirPassActionPerformed
 
     private void RepetirPassMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_RepetirPassMousePressed
-        NombreUsuario.setText("Ingrese su nombre de usuario");
-        NombreUsuario.setForeground(Color.gray);
         RepetirPass.setText("");
         RepetirPass.setForeground(Color.black);
     }//GEN-LAST:event_RepetirPassMousePressed
@@ -211,7 +206,13 @@ public class PaginaRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoContraseñaMousePressed
 
     private void BotonRegistrarseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonRegistrarseActionPerformed
-                                       // TODO add your handling code here:
+        GestionUsuarios gestion = new GestionUsuarios();
+        String appNombre = NombreUsuario.getText();
+        char[] pass1 = Pass1.getPassword();
+        char[] pass2 = RepetirPass.getPassword();
+        String appPassword = new String(pass1);
+        String appPassword2 = new String(pass2);
+        gestion.registroUsuario(appNombre, appPassword, appPassword2);
     }//GEN-LAST:event_BotonRegistrarseActionPerformed
 
     private void TextoContraseña1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TextoContraseña1MousePressed
@@ -219,7 +220,8 @@ public class PaginaRegistro extends javax.swing.JFrame {
     }//GEN-LAST:event_TextoContraseña1MousePressed
 
     private void Pass1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Pass1MousePressed
-        // TODO add your handling code here:
+        Pass1.setText("");
+        Pass1.setForeground(Color.black);
     }//GEN-LAST:event_Pass1MousePressed
 
     private void Pass1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Pass1ActionPerformed
