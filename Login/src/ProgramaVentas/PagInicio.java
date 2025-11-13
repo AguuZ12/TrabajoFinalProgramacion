@@ -29,6 +29,8 @@ public class PagInicio extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Fondo = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
         PalabraInicio = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
         NombreDelProducto = new javax.swing.JLabel();
@@ -61,6 +63,27 @@ public class PagInicio extends javax.swing.JPanel {
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jButton1.setBackground(new java.awt.Color(210, 249, 245));
+        jButton1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(51, 51, 51));
+        jButton1.setText("AGREGAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 90, 40));
+
+        jTextField1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
+        jTextField1.setText("Ingrese el codigo del producto");
+        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField1ActionPerformed(evt);
+            }
+        });
+        Fondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 270, 40));
+
         PalabraInicio.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         PalabraInicio.setForeground(new java.awt.Color(0, 119, 182));
         PalabraInicio.setText("Inicio");
@@ -72,11 +95,11 @@ public class PagInicio extends javax.swing.JPanel {
         PanelInicio.setLayout(PanelInicioLayout);
         PanelInicioLayout.setHorizontalGroup(
             PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 750, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         PanelInicioLayout.setVerticalGroup(
             PanelInicioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 80, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         Fondo.add(PanelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 80));
@@ -105,12 +128,12 @@ public class PagInicio extends javax.swing.JPanel {
                 BotonCobrarActionPerformed(evt);
             }
         });
-        Fondo.add(BotonCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 720, 80));
+        Fondo.add(BotonCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 720, 70));
 
         Total.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         Total.setForeground(new java.awt.Color(0, 119, 182));
         Total.setText("Total:");
-        Fondo.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 440, 230, 70));
+        Fondo.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 720, 40));
 
         jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
         jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
@@ -156,6 +179,14 @@ public class PagInicio extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonCobrarActionPerformed
 
+    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BotonCobrar;
@@ -168,6 +199,7 @@ public class PagInicio extends javax.swing.JPanel {
     private javax.swing.JLabel PrecioDeVenta;
     private javax.swing.JLabel Stock;
     private javax.swing.JLabel Total;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
@@ -176,5 +208,6 @@ public class PagInicio extends javax.swing.JPanel {
     private javax.swing.JSeparator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }
