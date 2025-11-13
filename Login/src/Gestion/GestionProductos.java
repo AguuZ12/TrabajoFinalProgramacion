@@ -70,13 +70,10 @@ public class GestionProductos {
 
     //FUNCION MUESTRA COMPLETA
     // MUESTRA LA LISTA DE TODOS LOS ITEMS DISPONIBLES CON SU NOMBRE, STOCK Y PRECIO
-    public void muestraCompleta(){
-        System.out.println("<========= INVENTARIO =========>");
-        System.out.printf("%-10s %-10s %s %n", "Producto", "Stock", "Precio");
-        for (Item item : listaItems){
-            System.out.printf("%-10s %-10s %s%n", item.getNombre(),item.getCodigo(), item.getStock(), item.getPrecioCompra(), item.getPrecioVenta());
-        }
+    public List<Item> muestraCompleta() {
+        return new ArrayList<>(listaItems); // Devuelve copia de la lista
     }
+   
 
     // MUESTRA ITEM
     //PERMITE LA BUSQUEDA DE 1 ITEM ESPECIFICO Y MUESTRA SU DESCRIPCION, STOCK Y PRECIO

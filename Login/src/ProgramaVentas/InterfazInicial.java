@@ -5,13 +5,15 @@
 package ProgramaVentas;
 
 import java.awt.BorderLayout;
+import Gestion.GestionProductos;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Emiliano Castro
  */
 public class InterfazInicial extends javax.swing.JFrame {
-
+    DefaultTableModel dtm = new DefaultTableModel();
     /**
      * Creates new form Inicio
      */
@@ -193,6 +195,16 @@ public class InterfazInicial extends javax.swing.JFrame {
         content.add(p3, BorderLayout.CENTER);
         content.revalidate();
         content.repaint();
+        
+       //GestionProductos g = new GestionProductos();
+       //String nombre = g.muestraCompleta().getNombre();
+       //String codigo = g.muestraCompleta().getCodigo();
+       //int stock = g.muestraCompleta().getStock();
+       //double precioCompra = g.muestraCompleta().getPrecioCompra();
+       //double precioVenta = g.muestraCompleta().getPrecioVenta();
+        
+       //dtm.addRow(new Objtect[]{nombre,codigo,stock,precioCompra,precioVenta});
+        
     }//GEN-LAST:event_BotonStockActionPerformed
 
     private void BotonAñadirStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonAñadirStockActionPerformed

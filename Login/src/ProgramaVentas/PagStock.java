@@ -4,17 +4,42 @@
  */
 package ProgramaVentas;
 
+import java.util.HashSet;
+import java.util.Set;
+import javax.swing.table.DefaultTableModel;
+import Gestion.GestionProductos;
+import Gestion.Item;
+import java.util.List;
+
 /**
  *
  * @author Emiliano Castro
  */
 public class PagStock extends javax.swing.JPanel {
-
+    
+    DefaultTableModel dtm = new DefaultTableModel();
     /**
      * Creates new form PagInicio
      */
     public PagStock() {
         initComponents();
+        TablaStock.setModel(dtm);
+        String titulos[] = {"Nombre del Producto","Codigo del Producto","Stock","Precio de Compra", "Precio de Venta"};
+        dtm.setColumnIdentifiers(titulos);
+        GestionProductos g = new GestionProductos();
+    List<Item> todosLosItems = g.muestraCompleta();
+    
+    // Agregar CADA item a la tabla
+    for (Item item : todosLosItems) {
+        String nombre = item.getNombre();
+        String codigo = item.getCodigo();
+        int stock = item.getStock();
+        double precioCompra = item.getPrecioCompra();
+        double precioVenta = item.getPrecioVenta();
+        
+        dtm.addRow(new Object[] {nombre, codigo, stock, precioCompra, precioVenta});
+    }
+
     }
 
     /**
@@ -31,19 +56,11 @@ public class PagStock extends javax.swing.JPanel {
         Fondo = new javax.swing.JPanel();
         PalabraStock = new javax.swing.JLabel();
         PanelStock = new javax.swing.JPanel();
-        NombreDelProducto = new javax.swing.JLabel();
-        CodigoDelProducto = new javax.swing.JLabel();
-        Stock = new javax.swing.JLabel();
-        PrecioDeCompra = new javax.swing.JLabel();
-        PrecioDeVenta = new javax.swing.JLabel();
         IngreseNombreDelProducto = new javax.swing.JTextField();
+        jButton1 = new javax.swing.JButton();
         PalabraBusqueda = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        TablaStock = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,58 +98,54 @@ public class PagStock extends javax.swing.JPanel {
 
         Fondo.add(PanelStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 80));
 
-        NombreDelProducto.setText("Nombre Del Producto");
-        Fondo.add(NombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 120, -1));
-
-        CodigoDelProducto.setText("Codigo Del Producto");
-        Fondo.add(CodigoDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 120, -1));
-
-        Stock.setText("Stock");
-        Fondo.add(Stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
-
-        PrecioDeCompra.setText("Precio De Compra");
-        Fondo.add(PrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
-
-        PrecioDeVenta.setText("Precio De Venta");
-        Fondo.add(PrecioDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
-
         IngreseNombreDelProducto.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         IngreseNombreDelProducto.setForeground(new java.awt.Color(153, 153, 153));
         IngreseNombreDelProducto.setText("Ingrese nombre del producto");
-        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 520, 40));
+        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 210, 40));
+
+        jButton1.setText("BUSCAR");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 160, 40));
 
         PalabraBusqueda.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         PalabraBusqueda.setForeground(new java.awt.Color(0, 119, 182));
         PalabraBusqueda.setText("Busqueda:");
         Fondo.add(PalabraBusqueda, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 740, 70));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 750, 10));
+        TablaStock.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Nombre del Producto", "Codigo del Producto", "Stock", "Precio de Compra", "Precio de Venta"
+            }
+        ));
+        jScrollPane2.setViewportView(TablaStock);
 
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 750, 10));
-
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 20, 360));
-
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 20, 360));
-
-        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 20, 360));
-
-        jSeparator6.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 20, 360));
+        Fondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 77, 750, 480));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -146,25 +159,21 @@ public class PagStock extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CodigoDelProducto;
     private javax.swing.JPanel Fondo;
     private javax.swing.JTextField IngreseNombreDelProducto;
-    private javax.swing.JLabel NombreDelProducto;
     private javax.swing.JLabel PalabraBusqueda;
     private javax.swing.JLabel PalabraStock;
     private javax.swing.JPanel PanelStock;
-    private javax.swing.JLabel PrecioDeCompra;
-    private javax.swing.JLabel PrecioDeVenta;
-    private javax.swing.JLabel Stock;
+    private javax.swing.JTable TablaStock;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
