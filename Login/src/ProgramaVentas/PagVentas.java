@@ -3,19 +3,65 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package ProgramaVentas;
+import javax.swing.table.DefaultTableModel;
+import Gestion.GestionVentas;
+import Gestion.Venta;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.List;
 
 /**
  *
  * @author Emiliano Castro
  */
 public class PagVentas extends javax.swing.JPanel {
-
+    DefaultTableModel dtm = new DefaultTableModel();
     /**
      * Creates new form PagInicio
      */
     public PagVentas() {
         initComponents();
+        
+        tablaVentas.setModel(dtm);
+        String titulos[] = {"Venta","Total","Fecha"};
+        dtm.setColumnIdentifiers(titulos);
+        GestionVentas v = new GestionVentas();
+        List<Venta> todasLasVentas = v.muestraCompletaVentas();
+        
+        for (Venta venta : todasLasVentas) {
+        int idVenta = venta.getIdVenta();
+        double totalVenta = venta.gettotalVenta();
+        String fecha = venta.fechaActual();
+        dtm.addRow(new Object[] {idVenta, totalVenta, fecha});
+        }
+        
+        
+        
+        int contador = dtm.getRowCount();
+        double totalVenta = 0.0;
+        for (int i = 0; i < contador; i++){
+        
+            Object totalVentaObj = dtm.getValueAt(i, 1);
+            Object fechaVentaObj = dtm.getValueAt(i, 2);
+            
+            if (totalVentaObj!= null && fechaVentaObj != null) {
+                
+               // Convertir el total
+        double totalVentaDia = Double.parseDouble(totalVentaObj.toString());
+        
+        // Convertir y comparar la fecha
+        String fechaVentaStr = fechaVentaObj.toString();
+        DateTimeFormatter formato = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate fechaVenta = LocalDate.parse(fechaVentaStr, formato);
+        
+        // Solo sumar si la venta es de hoy
+        if (fechaVenta.equals(LocalDate.now())) {
+            totalVenta += totalVentaDia;
+        }
+            }
+       TotalVentas.setText(String.valueOf(totalVenta));
     }
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -31,18 +77,10 @@ public class PagVentas extends javax.swing.JPanel {
         Fondo = new javax.swing.JPanel();
         PalabraInicio = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
-        NombreDelProducto = new javax.swing.JLabel();
-        CodigoDelProducto = new javax.swing.JLabel();
-        Stock = new javax.swing.JLabel();
-        PrecioDeCompra = new javax.swing.JLabel();
-        PrecioDeVenta = new javax.swing.JLabel();
+        TotalVentas = new javax.swing.JLabel();
         Total = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tablaVentas = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -80,53 +118,28 @@ public class PagVentas extends javax.swing.JPanel {
 
         Fondo.add(PanelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 80));
 
-        NombreDelProducto.setText("Nombre Del Producto");
-        Fondo.add(NombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 120, -1));
-
-        CodigoDelProducto.setText("Codigo Del Producto");
-        Fondo.add(CodigoDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 120, -1));
-
-        Stock.setText("Stock");
-        Fondo.add(Stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
-
-        PrecioDeCompra.setText("Precio De Compra");
-        Fondo.add(PrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
-
-        PrecioDeVenta.setText("Precio De Venta");
-        Fondo.add(PrecioDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
+        TotalVentas.setFont(new java.awt.Font("Roboto", 1, 36)); // NOI18N
+        Fondo.add(TotalVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 510, 210, 40));
 
         Total.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         Total.setForeground(new java.awt.Color(0, 119, 182));
         Total.setText("Recaudación de hoy:");
         Fondo.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 490, 740, 70));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 750, 10));
+        tablaVentas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(tablaVentas);
 
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 750, 10));
-
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 20, 360));
-
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 20, 360));
-
-        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 20, 360));
-
-        jSeparator6.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 20, 360));
+        Fondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 80, 750, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -142,22 +155,14 @@ public class PagVentas extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel CodigoDelProducto;
     private javax.swing.JPanel Fondo;
-    private javax.swing.JLabel NombreDelProducto;
     private javax.swing.JLabel PalabraInicio;
     private javax.swing.JPanel PanelInicio;
-    private javax.swing.JLabel PrecioDeCompra;
-    private javax.swing.JLabel PrecioDeVenta;
-    private javax.swing.JLabel Stock;
     private javax.swing.JLabel Total;
+    private javax.swing.JLabel TotalVentas;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaVentas;
     // End of variables declaration//GEN-END:variables
 }

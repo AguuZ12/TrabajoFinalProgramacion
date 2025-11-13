@@ -14,10 +14,10 @@ import java.util.List;
 public class GestionUsuarios {
     List<Usuario> listaUsuarios = new ArrayList<>(Arrays.asList(
             new Usuario("Agustin", "Agustin"),
-            new Usuario("carlos.lopez@empresa.com", "ClaveSegura789"),
-            new Usuario("maria.rodriguez@outlook.com", "Maria@2024"),
-            new Usuario("admin@sistema.com", "Admin123!"),
-            new Usuario("juan.perez@gmail.com", "Ju4nP3r3z!")
+            new Usuario("Gaston", "Gaston"),
+            new Usuario("Emiliano", "Emiliano"),
+            new Usuario("JuanPablo", "Juan-Pablo"),
+            new Usuario("admin", "admin")
     ));
 //Funcion comprobacion de existencia de usuaio
     public Usuario usuarioExiste(String appEmail){

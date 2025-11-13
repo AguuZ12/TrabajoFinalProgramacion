@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 import Gestion.GestionProductos;
 import Gestion.Item;
 import java.util.List;
+import Gestion.Fecha;
+import Gestion.GestionVentas;
 /**
  *
  * @author Emiliano Castro
@@ -187,7 +189,29 @@ public class PagInicio extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BotonCobrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonCobrarActionPerformed
-        // TODO add your handling code here:
+        GestionVentas v = new GestionVentas();
+        Fecha f = new Fecha();
+        int contador = dtm.getRowCount();
+        double totalVenta = 0.0;
+        for (int i = 0; i < contador; i++){
+        
+            Object cantidadObj = dtm.getValueAt(i, 2);
+            Object precioObj = dtm.getValueAt(i, 3);
+            
+            if (cantidadObj != null && precioObj != null) {
+                
+               int cantidadFila = Integer.parseInt(cantidadObj.toString());
+               double precioVenta = Double.parseDouble(precioObj.toString());
+                
+                double totalVentaMulti = cantidadFila * precioVenta;
+                totalVenta += totalVentaMulti;
+            }
+        }
+        
+        v.insertarVenta(v.getLargoLista(), totalVenta, f.getFechaActual());
+        
+       
+        
     }//GEN-LAST:event_BotonCobrarActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed

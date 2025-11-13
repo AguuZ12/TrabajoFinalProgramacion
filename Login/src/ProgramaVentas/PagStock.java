@@ -25,6 +25,7 @@ public class PagStock extends javax.swing.JPanel {
         initComponents();
         TablaStock.setModel(dtm);
         String titulos[] = {"Nombre del Producto","Codigo del Producto","Stock","Precio de Compra", "Precio de Venta"};
+        
         dtm.setColumnIdentifiers(titulos);
         GestionProductos g = new GestionProductos();
     List<Item> todosLosItems = g.muestraCompleta();

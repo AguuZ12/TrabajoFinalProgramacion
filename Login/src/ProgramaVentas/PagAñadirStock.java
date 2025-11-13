@@ -45,6 +45,7 @@ public class PagAñadirStock extends javax.swing.JPanel {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
+        FeedBack = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,6 +161,9 @@ public class PagAñadirStock extends javax.swing.JPanel {
         jLabel6.setText("PRECIO DE COMPRA");
         Fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, 30));
 
+        FeedBack.setFont(new java.awt.Font("Caveat", 1, 18)); // NOI18N
+        Fondo.add(FeedBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 570, 430, 20));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -183,7 +187,29 @@ public class PagAñadirStock extends javax.swing.JPanel {
         int precioVenta = Integer.parseInt(precioVentaT);
         
         GestionProductos g = new GestionProductos();
-        g.crearItem(Nombre, Codigo, stock, precioCompra, precioVenta);
+        g.itemExiste(Codigo);
+        
+        if (Nombre.isBlank()){
+            FeedBack.setText("El nombre no puede estar vacio");
+        }
+        if (Codigo.isBlank()){
+            FeedBack.setText("El codigo no puede estar vacio");
+        }
+         if (stock < 1){
+            FeedBack.setText("El Stock no puede ser menor a 1");
+        }
+        if (precioCompra < 1){
+            FeedBack.setText("El Precio de compra no puede ser menor a 1");
+        }
+        if (precioVenta < 1){
+            FeedBack.setText("El precio de venta no puede ser menor a 1");
+        }
+        if (g.itemExiste(Codigo) == null && !Codigo.isBlank()){
+            g.crearItem(Nombre, Codigo, stock, precioCompra, precioVenta);
+            FeedBack.setText("Item creado correctamente");
+        }
+        
+        
     }//GEN-LAST:event_AgregarStockActionPerformed
 
     private void NombreProductoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreProductoMousePressed
@@ -215,6 +241,7 @@ public class PagAñadirStock extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AgregarStock;
     private javax.swing.JTextField CodigoProducto;
+    private javax.swing.JLabel FeedBack;
     private javax.swing.JPanel Fondo;
     private javax.swing.JTextField NombreProducto;
     private javax.swing.JLabel PalabraAñadirStock;
