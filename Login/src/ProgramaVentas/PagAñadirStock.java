@@ -162,7 +162,7 @@ public class PagAñadirStock extends javax.swing.JPanel {
         Fondo.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 330, 180, 30));
 
         FeedBack.setFont(new java.awt.Font("Caveat", 1, 18)); // NOI18N
-        Fondo.add(FeedBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 570, 430, 20));
+        Fondo.add(FeedBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 570, 430, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
