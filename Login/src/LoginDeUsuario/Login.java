@@ -6,6 +6,7 @@ package LoginDeUsuario;
 
 import java.awt.Color;
 import Gestion.GestionUsuarios;
+import ProgramaVentas.InterfazInicial;
 
 
 /**
@@ -159,11 +160,17 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_NombreUsuarioActionPerformed
 
     private void BotonIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotonIniciarActionPerformed
+        InterfazInicial i = new InterfazInicial();
         GestionUsuarios gestion = new GestionUsuarios();
         String appEmail = NombreUsuario.getText();
         char[] Password = Pass.getPassword();
         String appPassword = new String(Password);
         gestion.inicioSesion(appEmail, appPassword);
+        
+        if (gestion.inicioSesion(appEmail, appPassword) == true){
+            new InterfazInicial().setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_BotonIniciarActionPerformed
 
     private void NombreUsuarioMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_NombreUsuarioMousePressed

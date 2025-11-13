@@ -107,7 +107,7 @@ public class PagStock extends javax.swing.JPanel {
                 IngreseNombreDelProductoMouseClicked(evt);
             }
         });
-        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, 220, 50));
+        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 500, 220, 50));
 
         BOTONLISTACOMP.setText("LISTA COMPLETA");
         BOTONLISTACOMP.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +115,7 @@ public class PagStock extends javax.swing.JPanel {
                 BOTONLISTACOMPActionPerformed(evt);
             }
         });
-        Fondo.add(BOTONLISTACOMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 180, 50));
+        Fondo.add(BOTONLISTACOMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 500, 180, 50));
 
         BOTONBUSQ.setText("BUSCAR");
         BOTONBUSQ.addActionListener(new java.awt.event.ActionListener() {
@@ -123,7 +123,7 @@ public class PagStock extends javax.swing.JPanel {
                 BOTONBUSQActionPerformed(evt);
             }
         });
-        Fondo.add(BOTONBUSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 130, 50));
+        Fondo.add(BOTONBUSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 500, 130, 50));
 
         PalabraBusqueda.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         PalabraBusqueda.setForeground(new java.awt.Color(0, 119, 182));
@@ -178,14 +178,20 @@ public class PagStock extends javax.swing.JPanel {
         dtm.setRowCount(0);
         String itemBuscado = IngreseNombreDelProducto.getText();
         
-        dtm.addRow(new Object[] {
+        if (g.itemExiste(itemBuscado)!= null){
+         dtm.addRow(new Object[] {
          g.itemExiste(itemBuscado).getNombre(),
          g.itemExiste(itemBuscado).getCodigo(),
          g.itemExiste(itemBuscado).getStock(),
          g.itemExiste(itemBuscado).getPrecioCompra(),
          g.itemExiste(itemBuscado).getPrecioVenta()});
+        }
+        else {
+            System.out.println("El item no existe");
+        }
         
-        IngreseNombreDelProducto.setText("");
+        
+    IngreseNombreDelProducto.setText("");
     }//GEN-LAST:event_BOTONBUSQActionPerformed
 
     private void IngreseNombreDelProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngreseNombreDelProductoMouseClicked
@@ -195,6 +201,7 @@ public class PagStock extends javax.swing.JPanel {
 
     private void BOTONLISTACOMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOTONLISTACOMPActionPerformed
     GestionProductos g = new GestionProductos();
+    dtm.setRowCount(0);
     List<Item> todosLosItems = g.muestraCompleta();
     
     // Agregar CADA item a la tabla

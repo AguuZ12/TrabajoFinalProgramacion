@@ -59,7 +59,7 @@ public class GestionProductos {
         if (itemExiste(appItem) == null){
             listaItems.add(new Item(appItem,codigo,stock,precioCompra,precioVenta));
             System.out.println("Item agregado correctamente");
-            System.out.print(itemExiste(appItem).getNombre()+ itemExiste(appItem).getCodigo() + itemExiste(appItem).getStock() + itemExiste(appItem).getPrecioCompra()+ itemExiste(appItem).getPrecioVenta());
+            
             return true;
         }
         else {
@@ -81,7 +81,10 @@ public class GestionProductos {
         if(appItem == null || appItem.isBlank()){
             System.out.println("El item no puede estar vacio");
         }
-
+        if (itemExiste(appItem) == null){
+        System.out.println("El item no existe");
+        }
+    
         if (itemExiste(appItem) != null){
             System.out.println("<========= INVENTARIO =========>");
             System.out.printf("%-10s %-10s %s %n", "Producto", "Stock", "Precio");

@@ -4,17 +4,25 @@
  */
 package ProgramaVentas;
 
+import javax.swing.table.DefaultTableModel;
+import Gestion.GestionProductos;
+import Gestion.Item;
+import java.util.List;
 /**
  *
  * @author Emiliano Castro
  */
 public class PagInicio extends javax.swing.JPanel {
-
+        
+   DefaultTableModel dtm = new DefaultTableModel();
     /**
      * Creates new form PagInicio
      */
     public PagInicio() {
         initComponents();
+        Venta.setModel(dtm);
+        String titulos[] = {"Nombre del Producto", "Codigo del Producto", "Cantidad", "Precio"};
+        dtm.setColumnIdentifiers(titulos);
     }
 
     /**
@@ -29,23 +37,19 @@ public class PagInicio extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         Fondo = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        Agregar = new javax.swing.JButton();
+        CANTIDAD = new javax.swing.JTextField();
+        CODPRODUCTO = new javax.swing.JTextField();
+        TotalCantidad = new javax.swing.JLabel();
+        Limpiar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         PalabraInicio = new javax.swing.JLabel();
         PanelInicio = new javax.swing.JPanel();
-        NombreDelProducto = new javax.swing.JLabel();
-        CodigoDelProducto = new javax.swing.JLabel();
-        Stock = new javax.swing.JLabel();
-        PrecioDeCompra = new javax.swing.JLabel();
-        PrecioDeVenta = new javax.swing.JLabel();
         BotonCobrar = new javax.swing.JButton();
         Total = new javax.swing.JLabel();
-        jSeparator1 = new javax.swing.JSeparator();
-        jSeparator2 = new javax.swing.JSeparator();
-        jSeparator3 = new javax.swing.JSeparator();
-        jSeparator4 = new javax.swing.JSeparator();
-        jSeparator5 = new javax.swing.JSeparator();
-        jSeparator6 = new javax.swing.JSeparator();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        Venta = new javax.swing.JTable();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -63,26 +67,55 @@ public class PagInicio extends javax.swing.JPanel {
         Fondo.setBackground(new java.awt.Color(255, 255, 255));
         Fondo.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(210, 249, 245));
-        jButton1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(51, 51, 51));
-        jButton1.setText("AGREGAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Agregar.setBackground(new java.awt.Color(210, 249, 245));
+        Agregar.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        Agregar.setForeground(new java.awt.Color(51, 51, 51));
+        Agregar.setText("AGREGAR");
+        Agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                AgregarActionPerformed(evt);
             }
         });
-        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 20, 90, 40));
+        Fondo.add(Agregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 30, 90, 40));
 
-        jTextField1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(153, 153, 153));
-        jTextField1.setText("Ingrese el codigo del producto");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+        CANTIDAD.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        CANTIDAD.setForeground(new java.awt.Color(153, 153, 153));
+        CANTIDAD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CANTIDADMousePressed(evt);
             }
         });
-        Fondo.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 20, 270, 40));
+        Fondo.add(CANTIDAD, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 30, 90, 40));
+
+        CODPRODUCTO.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        CODPRODUCTO.setForeground(new java.awt.Color(153, 153, 153));
+        CODPRODUCTO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                CODPRODUCTOMousePressed(evt);
+            }
+        });
+        Fondo.add(CODPRODUCTO, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 30, 90, 40));
+
+        TotalCantidad.setFont(new java.awt.Font("Caveat", 1, 36)); // NOI18N
+        Fondo.add(TotalCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 450, 520, 50));
+
+        Limpiar.setBackground(new java.awt.Color(255, 107, 107));
+        Limpiar.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
+        Limpiar.setText("Limpiar");
+        Limpiar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LimpiarActionPerformed(evt);
+            }
+        });
+        Fondo.add(Limpiar, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 510, 220, 70));
+
+        jLabel1.setFont(new java.awt.Font("Caveat", 1, 14)); // NOI18N
+        jLabel1.setText("COD PRODUCTO");
+        Fondo.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 10, 90, -1));
+
+        jLabel2.setFont(new java.awt.Font("Caveat", 1, 14)); // NOI18N
+        jLabel2.setText("CANTIDAD");
+        Fondo.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 10, 70, -1));
 
         PalabraInicio.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         PalabraInicio.setForeground(new java.awt.Color(0, 119, 182));
@@ -104,22 +137,7 @@ public class PagInicio extends javax.swing.JPanel {
 
         Fondo.add(PanelInicio, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 750, 80));
 
-        NombreDelProducto.setText("Nombre Del Producto");
-        Fondo.add(NombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 120, -1));
-
-        CodigoDelProducto.setText("Codigo Del Producto");
-        Fondo.add(CodigoDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 80, 120, -1));
-
-        Stock.setText("Stock");
-        Fondo.add(Stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, -1, -1));
-
-        PrecioDeCompra.setText("Precio De Compra");
-        Fondo.add(PrecioDeCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, -1, -1));
-
-        PrecioDeVenta.setText("Precio De Venta");
-        Fondo.add(PrecioDeVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(630, 80, -1, -1));
-
-        BotonCobrar.setBackground(new java.awt.Color(255, 107, 107));
+        BotonCobrar.setBackground(new java.awt.Color(102, 204, 0));
         BotonCobrar.setFont(new java.awt.Font("Roboto", 0, 48)); // NOI18N
         BotonCobrar.setForeground(new java.awt.Color(51, 51, 51));
         BotonCobrar.setText("Cobrar");
@@ -128,50 +146,43 @@ public class PagInicio extends javax.swing.JPanel {
                 BotonCobrarActionPerformed(evt);
             }
         });
-        Fondo.add(BotonCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 510, 720, 70));
+        Fondo.add(BotonCobrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 230, 70));
 
         Total.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         Total.setForeground(new java.awt.Color(0, 119, 182));
         Total.setText("Total:");
-        Fondo.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 720, 40));
+        Fondo.add(Total, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 460, 110, 40));
 
-        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 750, 10));
+        Venta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(Venta);
 
-        jSeparator2.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
-        Fondo.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 750, 10));
-
-        jSeparator3.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator3.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator3, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 80, 20, 360));
-
-        jSeparator4.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator4.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator4, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 20, 360));
-
-        jSeparator5.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator5.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator5, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 80, 20, 360));
-
-        jSeparator6.setBackground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setForeground(new java.awt.Color(0, 0, 0));
-        jSeparator6.setOrientation(javax.swing.SwingConstants.VERTICAL);
-        Fondo.add(jSeparator6, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 80, 20, 360));
+        Fondo.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(2, 80, 750, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, 594, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Fondo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -179,35 +190,78 @@ public class PagInicio extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BotonCobrarActionPerformed
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
+        GestionProductos g = new GestionProductos();
+        String producto = CODPRODUCTO.getText().trim();
+        String cantidadT = CANTIDAD.getText().trim();
+        int cantidad = Integer.parseInt(cantidadT);
+        
+        if (g.itemExiste(producto)!= null){
+         dtm.addRow(new Object[] {
+         g.itemExiste(producto).getNombre(),
+         g.itemExiste(producto).getCodigo(),
+         cantidad,
+         g.itemExiste(producto).getPrecioVenta()});
+        }
+        else {
+            System.out.println("El item no existe");
+        }
+        
+        int contador = dtm.getRowCount();
+        double totalVenta = 0.0;
+        for (int i = 0; i < contador; i++){
+        
+            Object cantidadObj = dtm.getValueAt(i, 2);
+            Object precioObj = dtm.getValueAt(i, 3);
+            
+            if (cantidadObj != null && precioObj != null) {
+                
+               int cantidadFila = Integer.parseInt(cantidadObj.toString());
+               double precioVenta = Double.parseDouble(precioObj.toString());
+                
+                double totalVentaMulti = cantidadFila * precioVenta;
+                totalVenta += totalVentaMulti;
+                
+                
+            }
+          TotalCantidad.setText(String.valueOf(totalVenta));  
+          CANTIDAD.setText("");
+          CODPRODUCTO.setText("");
+        }
+    }//GEN-LAST:event_AgregarActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void CODPRODUCTOMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CODPRODUCTOMousePressed
+        CODPRODUCTO.setText("");   
+    }//GEN-LAST:event_CODPRODUCTOMousePressed
+
+    private void CANTIDADMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_CANTIDADMousePressed
+       CANTIDAD.setText("");
+    }//GEN-LAST:event_CANTIDADMousePressed
+
+    private void LimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LimpiarActionPerformed
+        dtm.setRowCount(0);
+        CANTIDAD.setText("");
+        CODPRODUCTO.setText("");
+        TotalCantidad.setText("");
+    }//GEN-LAST:event_LimpiarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Agregar;
     private javax.swing.JButton BotonCobrar;
-    private javax.swing.JLabel CodigoDelProducto;
+    private javax.swing.JTextField CANTIDAD;
+    private javax.swing.JTextField CODPRODUCTO;
     private javax.swing.JPanel Fondo;
-    private javax.swing.JLabel NombreDelProducto;
+    private javax.swing.JButton Limpiar;
     private javax.swing.JLabel PalabraInicio;
     private javax.swing.JPanel PanelInicio;
-    private javax.swing.JLabel PrecioDeCompra;
-    private javax.swing.JLabel PrecioDeVenta;
-    private javax.swing.JLabel Stock;
     private javax.swing.JLabel Total;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel TotalCantidad;
+    private javax.swing.JTable Venta;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     // End of variables declaration//GEN-END:variables
 }

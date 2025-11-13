@@ -13,7 +13,7 @@ import java.util.Arrays;
 import java.util.List;
 public class GestionUsuarios {
     List<Usuario> listaUsuarios = new ArrayList<>(Arrays.asList(
-            new Usuario("Agustin", "Ana123456"),
+            new Usuario("Agustin", "Agustin"),
             new Usuario("carlos.lopez@empresa.com", "ClaveSegura789"),
             new Usuario("maria.rodriguez@outlook.com", "Maria@2024"),
             new Usuario("admin@sistema.com", "Admin123!"),
