@@ -57,7 +57,8 @@ public class PagStock extends javax.swing.JPanel {
         PalabraStock = new javax.swing.JLabel();
         PanelStock = new javax.swing.JPanel();
         IngreseNombreDelProducto = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        BOTONLISTACOMP = new javax.swing.JButton();
+        BOTONBUSQ = new javax.swing.JButton();
         PalabraBusqueda = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         TablaStock = new javax.swing.JTable();
@@ -101,15 +102,28 @@ public class PagStock extends javax.swing.JPanel {
         IngreseNombreDelProducto.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         IngreseNombreDelProducto.setForeground(new java.awt.Color(153, 153, 153));
         IngreseNombreDelProducto.setText("Ingrese nombre del producto");
-        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 510, 210, 40));
-
-        jButton1.setText("BUSCAR");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+        IngreseNombreDelProducto.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                IngreseNombreDelProductoMouseClicked(evt);
             }
         });
-        Fondo.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 510, 160, 40));
+        Fondo.add(IngreseNombreDelProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 500, 220, 50));
+
+        BOTONLISTACOMP.setText("LISTA COMPLETA");
+        BOTONLISTACOMP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BOTONLISTACOMPActionPerformed(evt);
+            }
+        });
+        Fondo.add(BOTONLISTACOMP, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 500, 180, 50));
+
+        BOTONBUSQ.setText("BUSCAR");
+        BOTONBUSQ.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BOTONBUSQActionPerformed(evt);
+            }
+        });
+        Fondo.add(BOTONBUSQ, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 500, 130, 50));
 
         PalabraBusqueda.setFont(new java.awt.Font("Roboto", 0, 36)); // NOI18N
         PalabraBusqueda.setForeground(new java.awt.Color(0, 119, 182));
@@ -159,19 +173,52 @@ public class PagStock extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void BOTONBUSQActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOTONBUSQActionPerformed
+        GestionProductos g = new GestionProductos();
+        dtm.setRowCount(0);
+        String itemBuscado = IngreseNombreDelProducto.getText();
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+        dtm.addRow(new Object[] {
+         g.itemExiste(itemBuscado).getNombre(),
+         g.itemExiste(itemBuscado).getCodigo(),
+         g.itemExiste(itemBuscado).getStock(),
+         g.itemExiste(itemBuscado).getPrecioCompra(),
+         g.itemExiste(itemBuscado).getPrecioVenta()});
+        
+        IngreseNombreDelProducto.setText("");
+    }//GEN-LAST:event_BOTONBUSQActionPerformed
+
+    private void IngreseNombreDelProductoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_IngreseNombreDelProductoMouseClicked
+        IngreseNombreDelProducto.setText("");
+        
+    }//GEN-LAST:event_IngreseNombreDelProductoMouseClicked
+
+    private void BOTONLISTACOMPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BOTONLISTACOMPActionPerformed
+    GestionProductos g = new GestionProductos();
+    List<Item> todosLosItems = g.muestraCompleta();
+    
+    // Agregar CADA item a la tabla
+    for (Item item : todosLosItems) {
+        String nombre = item.getNombre();
+        String codigo = item.getCodigo();
+        int stock = item.getStock();
+        double precioCompra = item.getPrecioCompra();
+        double precioVenta = item.getPrecioVenta();
+        
+        dtm.addRow(new Object[] {nombre, codigo, stock, precioCompra, precioVenta});
+    }
+    }//GEN-LAST:event_BOTONLISTACOMPActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton BOTONBUSQ;
+    private javax.swing.JButton BOTONLISTACOMP;
     private javax.swing.JPanel Fondo;
     private javax.swing.JTextField IngreseNombreDelProducto;
     private javax.swing.JLabel PalabraBusqueda;
     private javax.swing.JLabel PalabraStock;
     private javax.swing.JPanel PanelStock;
     private javax.swing.JTable TablaStock;
-    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

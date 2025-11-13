@@ -14,23 +14,23 @@ import java.util.List;
 
 public class GestionProductos {
     List<Item> listaItems = new ArrayList<>(Arrays.asList(
-            new Item("Arroz Blanco", "ALI001", 200, 800.0, 1500.0),
-            new Item("Fideos Tallarín", "ALI002", 150, 600.0, 1200.0),
-            new Item("Aceite de Girasol", "ALI003", 80, 2500.0, 4500.0),
-            new Item("Harina 0000", "ALI004", 120, 700.0, 1300.0),
-            new Item("Azúcar Común", "ALI005", 180, 900.0, 1700.0),
-            new Item("Sal Fina", "ALI006", 90, 400.0, 800.0),
-            new Item("Leche Entera", "LAC001", 300, 300.0, 600.0),
-            new Item("Queso Cremón", "LAC002", 60, 3500.0, 6500.0),
-            new Item("Manteca", "LAC003", 75, 1200.0, 2200.0),
-            new Item("Yogur Natural", "LAC004", 200, 250.0, 500.0)
+            new Item("Arroz Blanco", "ALI001", 200, 800.0,  1500.0),
+            new Item("Fideos Tallarín", "ALI002", 150, 600.0 , 1200.0),
+            new Item("Aceite de Girasol", "ALI003", 80, 2500.0 , 4500.0),
+            new Item("Harina 0000", "ALI004", 120, 700.0 , 1300.0),
+            new Item("Azúcar Común", "ALI005", 180, 900.0 , 1700.0),
+            new Item("Sal Fina", "ALI006", 90, 400.0 , 800.0),
+            new Item("Leche Entera", "LAC001", 300, 300.0 , 600.0),
+            new Item("Queso Cremón", "LAC002", 60, 3500.0 , 6500.0),
+            new Item("Manteca", "LAC003", 75, 1200.0 , 2200.0),
+            new Item("Yogur Natural", "LAC004", 200, 250.0 , 500.0)
     ));
 
    // FUNCION EXISTE
    // ESTA FUNCION RECORRE LA LISTA COMPLETA COMPARANDO CADA ITEM CON EL NOMBRE DEL ITEM INGRESADO POR EL USUARIO, EN CASO DE EXISTIR UN ITEM CON ESE NOMBRE DEVUELVE LA ENTIDAD, EN CASO DE NO EXISTIR DEVUELVE NULL
     public Item itemExiste(String getItem){
         for (Item item : listaItems){
-            if (item.getNombre().equalsIgnoreCase(getItem)){
+            if (item.getCodigo().equalsIgnoreCase(getItem)){
                 return item;
             }
         }
@@ -71,7 +71,7 @@ public class GestionProductos {
     //FUNCION MUESTRA COMPLETA
     // MUESTRA LA LISTA DE TODOS LOS ITEMS DISPONIBLES CON SU NOMBRE, STOCK Y PRECIO
     public List<Item> muestraCompleta() {
-        return new ArrayList<>(listaItems); // Devuelve copia de la lista
+        return new ArrayList<>(listaItems); 
     }
    
 

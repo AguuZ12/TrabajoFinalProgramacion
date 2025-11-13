@@ -19,7 +19,7 @@ public class Item{
         this.nombre = nombre;
         this.codigo = codigo;
         this.stock = stock;
-        this.precioVenta = precioCompra;
+        this.precioCompra = precioCompra;
         this.precioVenta = precioVenta;
     }
 
